@@ -28,9 +28,10 @@ from sistema_base import (
     ErrorSistema,
 )
 # ─── Importar clases del equipo ───────────────────────────────────────────────
-# Mientras los módulos reales no estén disponibles se usan los stubs de
-# clases_demo.py. Cuando el equipo integre sus módulos, cambiar estas líneas.
-from clases_demo import ClienteDemo as Cliente, ServicioDemo as Servicio, ReservaDemo as Reserva
+
+from Cliente import Cliente
+from servicio import crear_servicio as Servicio
+from Reserva import Reserva
 # ─────────────────────────────────────────────────────────────────────────────
 from datetime import datetime
 from typing import Dict, Any, List, Optional
@@ -176,7 +177,7 @@ def operacion_3(logger: GestorLogs) -> bool:
         servicio = Servicio(
             id_servicio="SERV001",
             nombre="Sala de Conferencias Premium",
-            precio_base=150000.0,  # $150,000 por hora
+            precio_base=150000.0,
             tipo="reserva_sala"
         )
         

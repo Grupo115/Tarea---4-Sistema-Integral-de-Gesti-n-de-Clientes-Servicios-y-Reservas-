@@ -49,7 +49,7 @@ class Reserva(EntidadBase):
             raise ErrorOperacionNoPermitida("La reserva ya está confirmada")
         if self.estado_reserva == 'cancelada':
             raise ErrorOperacionNoPermitida("No se puede confirmar una reserva cancelada")
-        self.costo_total = self.servicio.calcular_costo(self.duracion)
+        self.costo_total = self.servicio.calcular_costo(self.duracion, 0.0, 0.0)
         self.estado_reserva = 'confirmada'
 
     def cancelar(self) -> None:
@@ -70,9 +70,9 @@ class Reserva(EntidadBase):
     def serializar(self) -> Dict[str, Any]:
         return {
             'id': self._id,
-            'cliente_id': self.cliente._id,
+            'cliente_id': self.cliente.obtener_id(),
             'cliente_nombre': self.cliente.nombre,
-            'servicio_id': self.servicio._id,
+            'servicio_id': self.servicio.obtener_id(),
             'servicio_nombre': self.servicio.nombre,
             'duracion': self.duracion,
             'costo_total': self.costo_total,
